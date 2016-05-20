@@ -1,7 +1,10 @@
 
 package me.pengwei.phonegap.plugins;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 
 import org.apache.cordova.CallbackContext;
@@ -10,6 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class OpenInBrowser extends CordovaPlugin {
     
     @Override
@@ -17,6 +22,7 @@ public class OpenInBrowser extends CordovaPlugin {
         
         final JSONObject options = args.getJSONObject(0);
         final String url = options.getString("url");
+        final String packageName = options.getString("package_name");
         
         if (action.equals("showQQBrowser")) {
             showQQBrowser(url);
@@ -26,6 +32,11 @@ public class OpenInBrowser extends CordovaPlugin {
         if (action.equals("showUCBrowser")) {
             showUCBrowser(url);
             return true;
+        }
+
+        if (action.equals("isClientAvailable")) {
+            isClientAvailable(this.cordova.getActivity(), packageName);
+            //return true;
         }
         
         return true;
@@ -39,7 +50,7 @@ public class OpenInBrowser extends CordovaPlugin {
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setData(Uri.parse(url));
         //startActivity(intent);
-        cordova.getActivity().startActivity(intent);
+        this.cordova.getActivity().startActivity(intent);
     }
     
     /** 直接启动UC，用于验证测试。 */
@@ -50,7 +61,23 @@ public class OpenInBrowser extends CordovaPlugin {
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setData(Uri.parse(url));
         //startActivity(intent);
-        cordova.getActivity().startActivity(intent);
+        this.cordova.getActivity().startActivity(intent);
+
+    }
+
+    /** 判断安装包是否可用*/
+    private static boolean isClientAvailable(Context context, String packageName) {
+        PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                if (pn.equals(packageName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
 }

@@ -1,12 +1,15 @@
-
 function OpenInBrowser() {
-	
+
 }
 
-OpenInBrowser.prototype.showWithOptions = function (options, successCallback, errorCallback) {
+OpenInBrowser.prototype.showQQBrowser = function (options, successCallback, errorCallback) {
   options.url = options.url.toString();
-  options.show = options.show.toString();
-  cordova.exec(successCallback, errorCallback, "OpenInBrowser", options.show, [options]);
+  cordova.exec(successCallback, errorCallback, "OpenInBrowser", "showQQBrowser", [options]);
+};
+
+OpenInBrowser.prototype.showUCBrowser = function (options, successCallback, errorCallback) {
+  options.url = options.url.toString();
+  cordova.exec(successCallback, errorCallback, "OpenInBrowser", "showUCBrowser", [options]);
 };
 
 OpenInBrowser.install = function () {
