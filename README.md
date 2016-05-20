@@ -1,2 +1,3 @@
 # me-pengwei-openinbrowser
-openinbrowser
+
+<pre>$ phonegap local plugin add https://github.com/kakawawa/me-pengwei-openinbrowser.git</pre>
