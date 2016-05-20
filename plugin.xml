@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+           id="me-pengwei-openinbrowser"
+      version="1.0.0">
+    <name>OpenInBrowser</name>
+    <description>Open In Browser</description>
+    <license>MIT</license>
+    <keywords>cordova,openinbrowser</keywords>
+
+    <js-module src="www/OpenInBrowser.js" name="OpenInBrowser">
+        <clobbers target="window.plugins.openinbrowser" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="OpenInBrowser" >
+                <param name="android-package" value="me.pengwei.phonegap.plugins.OpenInBrowser"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/OpenInBrowser.java" target-dir="src/me/pengwei/phonegap/plugins" />
+    </platform>
+</plugin>
