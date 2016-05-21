@@ -24,21 +24,20 @@ public class OpenInBrowser extends CordovaPlugin {
         
         if (action.equals("showQQBrowser")) {
             final String url = options.getString("url");
-            showQQBrowser(url);
+            this.showQQBrowser(url);
             return true;
         }
         
         if (action.equals("showUCBrowser")) {
             final String url = options.getString("url");
-            showUCBrowser(url);
+            this.showUCBrowser(url);
             return true;
         }
 
 
         if (action.equals("isClientAvailable")) {
             final String packageName = options.getString("packageName");
-            final boolean res = isClientAvailable(this.cordova.getActivity(), packageName);
-            return res;
+            return this.isClientAvailable(this.cordova.getActivity(), packageName);
         }
 
         
