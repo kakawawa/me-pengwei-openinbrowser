@@ -21,14 +21,15 @@ public class OpenInBrowser extends CordovaPlugin {
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         
         final JSONObject options = args.getJSONObject(0);
-        final String url = options.getString("url");
         
         if (action.equals("showQQBrowser")) {
+            final String url = options.getString("url");
             showQQBrowser(url);
             return true;
         }
         
         if (action.equals("showUCBrowser")) {
+            final String url = options.getString("url");
             showUCBrowser(url);
             return true;
         }
