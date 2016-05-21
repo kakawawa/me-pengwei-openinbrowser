@@ -22,7 +22,6 @@ public class OpenInBrowser extends CordovaPlugin {
         
         final JSONObject options = args.getJSONObject(0);
         final String url = options.getString("url");
-        final String packageName = options.getString("package_name");
         
         if (action.equals("showQQBrowser")) {
             showQQBrowser(url);
@@ -34,10 +33,13 @@ public class OpenInBrowser extends CordovaPlugin {
             return true;
         }
 
+
         if (action.equals("isClientAvailable")) {
+            final String packageName = options.getString("packageName");
             isClientAvailable(this.cordova.getActivity(), packageName);
             //return true;
         }
+
         
         return true;
     }
