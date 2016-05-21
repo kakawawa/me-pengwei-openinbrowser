@@ -37,8 +37,8 @@ public class OpenInBrowser extends CordovaPlugin {
 
         if (action.equals("isClientAvailable")) {
             final String packageName = options.getString("packageName");
-            isClientAvailable(this.cordova.getActivity(), packageName);
-            //return true;
+            final boolean res = isClientAvailable(this.cordova.getActivity(), packageName);
+            return res;
         }
 
         
@@ -69,7 +69,7 @@ public class OpenInBrowser extends CordovaPlugin {
     }
 
     /** 判断安装包是否可用*/
-    private static boolean isClientAvailable(Context context, String packageName) {
+    private boolean isClientAvailable(Context context, String packageName) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
         if (pinfo != null) {
